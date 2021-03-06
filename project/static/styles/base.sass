@@ -1,0 +1,142 @@
+SASS SYNTAX
+// _base.sass
+$font-stack:    "Times New Roman", Helvetica, sans-serif
+
+// Winnipeg Jets retro reverse colors
+$navy: #041E42
+$blue: #0073c5
+$red: #AC162C
+$maroon: #7B303E
+$darkGray: #55565A
+$silver: #8E9090
+$white: #FFFFFF
+
+@mixin multi-center($horizontal: true, $vertical: true) 
+  position: absolute
+
+  @if ($horizontal and $vertical) 
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+
+  @else if ($horizontal)
+    left: 50%
+    transform: translate(-50%, 0)
+
+  @else if ($vertical) 
+    top: 50%
+    transform: translate(0, -50%)
+
+// Y axis : @include centre(y)
+// X axis : @include centre(x)
+// Both axis : @include centre  
+@mixin centre($axis: "both")
+  position: absolute
+  @if $axis == "y"
+      top: 50%
+      -webkit-transform: translateY(-50%)
+      -moz-transform: translateY(-50%)
+      -ms-transform: translateY(-50%)
+      -o-transform: translateY(-50%)
+      transform: translateY(-50%)
+  
+  @if $axis == "x"
+      left: 50%
+      -webkit-transform: translateX(-50%)
+      -moz-transform: translateX(-50%)
+      -ms-transform: translateX(-50%)
+      -o-transform: translateX(-50%)
+      transform: translateX(-50%)
+  
+  @if $axis == "both"
+      top: 50%
+      left: 50%
+      -webkit-transform: translate(-50%, -50%)
+      -moz-transform: translate(-50%, -50%)
+      -ms-transform: translate(-50%, -50%)
+      -o-transform: translate(-50%, -50%)
+      transform: translate(-50%, -50%)
+    
+/// Stroke font-character
+/// @param  {Integer} $stroke - Stroke width
+/// @param  {Color}   $color  - Stroke color
+/// @return {List}            - text-shadow list
+@function stroke($stroke, $color) 
+  $shadow: ()
+  $from: $stroke*-1
+  @for $i from $from through $stroke 
+   @for $j from $from through $stroke 
+      $shadow: append($shadow, $i*1px $j*1px 0 $color, comma)
+    
+  
+  @return $shadow
+
+/// Stroke font-character
+/// @param  {Integer} $stroke - Stroke width
+/// @param  {Color}   $color  - Stroke color
+/// @return {Style}           - text-shadow
+@mixin stroke($stroke, $color) 
+  text-shadow: stroke($stroke, $color)
+
+html
+  background-color: $darkGray
+  padding-bottom: 5px
+  padding-left: 50px
+  padding-right: 50px
+  padding-top: 2px
+
+.title 
+  @include stroke($stroke: 2.5, $color: $navy)
+  font: 150% $font-stack
+  color: $blue
+  padding-top: 30px
+  text-align: center
+
+.subtitle 
+  @include stroke($stroke: 2, $color: $navy)
+  font: 130% $font-stack
+  color: $blue 
+  text-align: center
+
+.navbar
+  float: right
+
+.navbar-item
+  @include stroke($stroke: 1, $color: $navy)
+  font: 100% $font-stack
+  color: $blue
+  background-color: $silver
+  padding: 5px
+  &:hover
+    color: $red
+  &:active
+    background-color: $red
+
+.box
+  @include multi-center($horizontal: true, $vertical: true)
+  background-color: $silver
+  border: $white
+  text-align: center
+
+.multi-box
+  // @include multi-center($horizontal: true, $vertical: true)
+  // @include centre($axis: "x")
+  background-color: $silver
+  text-align: center
+  padding-bottom: 5px
+  padding-left: 50px
+  padding-right: 50px
+  padding-top: 2px
+  // border-style: hidden
+
+.clicker
+  @include stroke($stroke: 1.5, $color: $navy)
+  color: $blue
+  &:hover
+    color: $red
+
+
+
+
+
+

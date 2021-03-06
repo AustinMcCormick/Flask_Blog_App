@@ -1,0 +1,72 @@
+html {
+  background-color: #55565A;
+  padding-bottom: 5px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 2px;
+}
+
+.title {
+  text-shadow: -2.5px -2.5px 0 #041E42, -2.5px -1.5px 0 #041E42, -2.5px -0.5px 0 #041E42, -2.5px 0.5px 0 #041E42, -2.5px 1.5px 0 #041E42, -2.5px 2.5px 0 #041E42, -1.5px -2.5px 0 #041E42, -1.5px -1.5px 0 #041E42, -1.5px -0.5px 0 #041E42, -1.5px 0.5px 0 #041E42, -1.5px 1.5px 0 #041E42, -1.5px 2.5px 0 #041E42, -0.5px -2.5px 0 #041E42, -0.5px -1.5px 0 #041E42, -0.5px -0.5px 0 #041E42, -0.5px 0.5px 0 #041E42, -0.5px 1.5px 0 #041E42, -0.5px 2.5px 0 #041E42, 0.5px -2.5px 0 #041E42, 0.5px -1.5px 0 #041E42, 0.5px -0.5px 0 #041E42, 0.5px 0.5px 0 #041E42, 0.5px 1.5px 0 #041E42, 0.5px 2.5px 0 #041E42, 1.5px -2.5px 0 #041E42, 1.5px -1.5px 0 #041E42, 1.5px -0.5px 0 #041E42, 1.5px 0.5px 0 #041E42, 1.5px 1.5px 0 #041E42, 1.5px 2.5px 0 #041E42, 2.5px -2.5px 0 #041E42, 2.5px -1.5px 0 #041E42, 2.5px -0.5px 0 #041E42, 2.5px 0.5px 0 #041E42, 2.5px 1.5px 0 #041E42, 2.5px 2.5px 0 #041E42;
+  font: 150% "Times New Roman", Helvetica, sans-serif;
+  color: #0073c5;
+  padding-top: 30px;
+  text-align: center;
+}
+
+.subtitle {
+  text-shadow: -2px -2px 0 #041E42, -2px -1px 0 #041E42, -2px 0px 0 #041E42, -2px 1px 0 #041E42, -2px 2px 0 #041E42, -1px -2px 0 #041E42, -1px -1px 0 #041E42, -1px 0px 0 #041E42, -1px 1px 0 #041E42, -1px 2px 0 #041E42, 0px -2px 0 #041E42, 0px -1px 0 #041E42, 0px 0px 0 #041E42, 0px 1px 0 #041E42, 0px 2px 0 #041E42, 1px -2px 0 #041E42, 1px -1px 0 #041E42, 1px 0px 0 #041E42, 1px 1px 0 #041E42, 1px 2px 0 #041E42, 2px -2px 0 #041E42, 2px -1px 0 #041E42, 2px 0px 0 #041E42, 2px 1px 0 #041E42, 2px 2px 0 #041E42;
+  font: 130% "Times New Roman", Helvetica, sans-serif;
+  color: #0073c5;
+  text-align: center;
+}
+
+.navbar {
+  float: right;
+}
+
+.navbar-item {
+  text-shadow: -1px -1px 0 #041E42, -1px 0px 0 #041E42, -1px 1px 0 #041E42, 0px -1px 0 #041E42, 0px 0px 0 #041E42, 0px 1px 0 #041E42, 1px -1px 0 #041E42, 1px 0px 0 #041E42, 1px 1px 0 #041E42;
+  font: 100% "Times New Roman", Helvetica, sans-serif;
+  color: #0073c5;
+  background-color: #8E9090;
+  padding: 5px;
+}
+
+.navbar-item:hover {
+  color: #AC162C;
+}
+
+.navbar-item:active {
+  background-color: #AC162C;
+}
+
+.box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: #8E9090;
+  border: #FFFFFF;
+  text-align: center;
+}
+
+.multi-box {
+  background-color: #8E9090;
+  text-align: center;
+  padding-bottom: 5px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 2px;
+}
+
+.clicker {
+  text-shadow: -1.5px -1.5px 0 #041E42, -1.5px -0.5px 0 #041E42, -1.5px 0.5px 0 #041E42, -1.5px 1.5px 0 #041E42, -0.5px -1.5px 0 #041E42, -0.5px -0.5px 0 #041E42, -0.5px 0.5px 0 #041E42, -0.5px 1.5px 0 #041E42, 0.5px -1.5px 0 #041E42, 0.5px -0.5px 0 #041E42, 0.5px 0.5px 0 #041E42, 0.5px 1.5px 0 #041E42, 1.5px -1.5px 0 #041E42, 1.5px -0.5px 0 #041E42, 1.5px 0.5px 0 #041E42, 1.5px 1.5px 0 #041E42;
+  color: #0073c5;
+}
+
+.clicker:hover {
+  color: #AC162C;
+}
+/*# sourceMappingURL=base.css.map */
