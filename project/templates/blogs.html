@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Welcome
+</h1>
+<h2 class="subtitle">
+  Recent Posts
+</h2>
+{% for blog in blogs %}
+<div class="box">
+  <tr>
+      <td class="blog-title">{{ blog.title }}</td>
+      <br>
+      <td class="blog-content">{{ blog.content }}</td>
+
+      {% if current_user.is_authenticated %}
+      <td>
+          <br>
+          <a class="clicker" href="/delete/{{blog.id}}">Delete</a>
+          <a class="clicker" href="/update/{{blog.id}}">Update</a>
+          <br>
+      </td>
+      <br>
+      {% endif %}
+  </tr>        
+</div>
+
+{% endfor %}
+{% endblock %}
+
