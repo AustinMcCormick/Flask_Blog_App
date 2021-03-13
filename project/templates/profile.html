@@ -1,7 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1 class="title">
-  Welcome, {{ name }}
-</h1>
+<div>
+  <img src="{{ picture }}" alt="No Profile Picture currently set" style="width: 20vw; min-width: 55px;">
+</div>
+<div>
+  <a class="clicker" href="/upload">Upload Profile Picture</a>
+  <br>
+  <a class="clicker" href="/update_profile">Update Profile</a>
+</div>
+<div>
+  <h1 class="title">
+    {{ title }}
+  </h1>
+  <h2 class="subtitle">
+    {{ name }}
+  </h2>
+  <div class="text-box">
+    <p1>
+      {{ email }}
+    </p1>
+  </div>
+
+  <div class="text-box">
+    <div>
+      <p1 class="content">
+        {{ content }}
+      </p1>
+    </div>
+  </div>
+</div> 
 {% endblock %}

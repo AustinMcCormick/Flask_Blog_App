@@ -69,4 +69,11 @@ html {
 .clicker:hover {
   color: #AC162C;
 }
+
+.text-box {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  text-align: center;
+  background-color: #8E9090;
+}
 /*# sourceMappingURL=base.css.map */

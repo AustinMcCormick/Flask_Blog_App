@@ -4,7 +4,15 @@ from flask_login import login_user, logout_user, login_required, current_user
 from.models import User, Blog
 from . import db
 from datetime import datetime
+import os
+from werkzeug.utils import secure_filename
+import hashlib
 
+UPLOAD_FOLDER = 'project/static/imgs/'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+
+def allowed_file(filename):
+	return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 auth = Blueprint('auth', __name__)
 
@@ -38,11 +46,10 @@ def login_post():
 
 
 @auth.route('/signup')
-@login_required
 def signup():
     return render_template('signup.html')
 
-"""
+
 @auth.route('/signup', methods=['POST'])
 def signup_post():
     email = request.form.get('email')
@@ -65,7 +72,7 @@ def signup_post():
     db.session.commit()
 
     return redirect(url_for('auth.login'))
-"""
+
 
 @auth.route('/logout')
 @login_required
@@ -76,6 +83,10 @@ def logout():
 @auth.route('/blogs')
 def blogs():
     blogs = Blog.query.order_by(Blog.created_at).all()
+
+    if (current_user.is_authenticated and current_user.account_type == 'admin'):
+            return render_template('admin_blogs.html', blogs=blogs)
+        
     return render_template('blogs.html', blogs=blogs)
 
 @auth.route('/create')
@@ -133,3 +144,66 @@ def update(id):
 
     else:
         return render_template('update.html', blog=blog)        
+
+
+@auth.route('/upload', methods=['GET', 'POST'])
+@login_required
+def upload():
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No image selected for uploading')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            # upload acceptable profile picture
+            hs = hashlib.sha256(current_user.email.encode('utf-8')).hexdigest()
+            file.save(os.path.join(UPLOAD_FOLDER, hs))
+            
+            current_user.profile_picture = '/static/imgs/' + hs
+            db.session.commit()
+            return redirect(url_for('main.profile'))
+        else:
+            flash('Allowed image types are -> png, jpg, jpeg')
+            return redirect(request.url)
+            
+    else:  
+        return render_template('upload.html') 
+
+
+@auth.route('/update_profile', methods=['GET', 'POST'])
+@login_required
+def update_profile():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        profile_content = request.form.get('profile_content')
+        public_profile = request.form.get('public_profile') 
+        email = request.form.get('email') 
+
+        if(public_profile == 'False'):
+            current_user.public_profile = False
+        else:
+            current_user.public_profile = True
+        
+        if(name != ''):
+            current_user.name = name
+
+        if(email != ''):
+            user = User.query.filter_by(email=email).first()
+            # If the user email already exists redirect back to update profile page
+            if user: 
+                flash('Email address already exists')
+                return redirect(url_for('auth.update_profile'))
+            else:
+                current_user.email = email
+
+        if(profile_content != ''):
+            current_user.profile_content = profile_content
+        
+        db.session.commit()
+
+        return redirect(url_for('main.profile'))
+    else:
+        return render_template('update_profile.html')

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-4 is-offset-4">
+    <h3 class="title">Update Profile</h3>
+    <div class="box">
+        <div class="form">
+            <form action="/update_profile" method="POST">
+                <input type="text" name="name" id="name" placeholder="Update your username">
+                <br>  
+                <input type="text" name="email" id="email" placeholder="Update Email on file">
+                <br>
+                <textarea class="form-control" name="profile_content" id="profile_content" placeholder="Update your profile's blurb" cols="50" rows="8"></textarea>       
+                <br>     
+                <input type="checkbox" id="public_profile" name="public_profile" value="False">
+                <label for="public_profile">Make Profile Private</label>
+                <br>
+                <input type="submit" value="Update Profile">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
