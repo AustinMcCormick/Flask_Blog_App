@@ -25,6 +25,9 @@
                     <div id="navbarMenuHeroA" class="navbar-menu">
                         <div class="navbar-end">
                             {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('auth.store') }}" class="navbar-item">
+                                Store
+                            </a>
                             <a href="{{ url_for('main.profile') }}" class="navbar-item">
                                 Profile
                             </a>

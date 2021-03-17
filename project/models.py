@@ -12,6 +12,9 @@ class User(UserMixin, db.Model):
     profile_title = db.Column(db.String(100), default="Welcome to my profile page")
     profile_picture = db.Column(db.String(100), default="/static/imgs/basic_profile_pic.jpg")
     profile_content = db.Column(db.String(1000), default="No profile content")
+    subscribed = db.Column(db.Boolean, unique=False, default=False)
+    subscription_start = db.Column(db.DateTime)
+    sub_token = db.Column(db.String(200))
     
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

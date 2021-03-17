@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Welcome to the blog shop
+</h1>
+<h2 class="subtitle">
+  Purchase blog subscription for $9.99
+</h2>
+
+<form action="/subscribe" method="POST">
+    <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="{{ pub_key }}"
+        data-amount="999"
+        data-name="Blog Subscription"
+        data-description="Best money you every spent"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto">
+    </script>
+</form>
+{% endblock %}

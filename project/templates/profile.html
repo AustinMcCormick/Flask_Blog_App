@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+{% if current_user.subscribed %}
+  <div> 
+    <h1 class="title">
+      THIS IS A TITLE FOR USERS WHO ARE SUBSCRIBED
+    </h1>
+  </div>
+{% endif %}
+
 <div>
   <img src="{{ picture }}" alt="No Profile Picture currently set" style="width: 20vw; min-width: 55px;">
 </div>

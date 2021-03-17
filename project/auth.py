@@ -5,8 +5,14 @@ from.models import User, Blog
 from . import db
 from datetime import datetime
 import os
+import stripe
 from werkzeug.utils import secure_filename
 import hashlib
+
+pub_key = "pk_test_51IViHvAQv6jPBCWoryj1i2f3n9OJXeelJSd4v2eWButhJENzdGMiSgo5Msh01Cv0LyZrUzXrfztSd2iTV358Bnln00BWhOZ3ub"
+secret_key = "sk_test_51IViHvAQv6jPBCWo0RvnSBdoWPfGRLFOaTw1vyc1xqwaXbGwYambggt8VQTZAfcgZsWoXUKuz1Y4eg2i3gLlIKUQ00FjuwpTzm"
+
+stripe.api_key = secret_key
 
 UPLOAD_FOLDER = 'project/static/imgs/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
@@ -207,3 +213,41 @@ def update_profile():
         return redirect(url_for('main.profile'))
     else:
         return render_template('update_profile.html')
+
+
+@auth.route('/store', methods=['GET', 'POST'])
+@login_required
+def store():
+    if (request.method == 'POST'):
+        return redirect(url_for('main.profile'))
+    else:
+        return render_template('store.html', pub_key=pub_key)
+
+@auth.route('/subscribe', methods=['POST'])
+@login_required
+def subscribe():
+
+    customer = stripe.Customer.create(email=request.form['stripeEmail'], source=request.form['stripeToken'])
+
+    charge = stripe.Charge.create(
+        customer=customer.id,
+        amount=999,
+        currency='usd',
+        description='Blog sub purchase'
+    )
+
+    print(" Pre ", current_user.subscription_start, " Stripe token ", current_user.sub_token)
+
+    current_user.subscription_start = datetime.now()
+    current_user.sub_token = request.form['stripeToken']
+    db.session.commit()
+
+    print("post ", current_user.subscription_start, " Stripe token ", current_user.sub_token)
+
+
+    return redirect(url_for('auth.thanks'))
+
+@auth.route('/thanks', methods=['GET'])
+@login_required
+def thanks():
+    return render_template('thanks.html')

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% if current_user.subscribed %}
+  <div> 
+    <h1 class="title">
+      THIS IS A TITLE FOR USERS WHO ARE SUBSCRIBED
+    </h1>
+  </div>
+{% endif %}
+
+<div class="box">
+    Thank you for the blog subscription
+</div>
+{% endblock %}

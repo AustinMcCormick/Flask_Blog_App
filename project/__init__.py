@@ -2,6 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 
+
 db = SQLAlchemy()
 
 def create_app():
@@ -10,6 +11,7 @@ def create_app():
     app.config['TEMPLATES_AUTO_RELOAD'] = True
     app.config['SECRET_KEY'] = 'SneakySnake'
 
+     
     # Initialize SQLAlchemy
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://Austin:One23456@localhost/flask_auth_appDB'
     # app.config['SQLALCHEMY_ECHO'] = True
