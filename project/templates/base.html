@@ -33,7 +33,7 @@
                             </a>
                             {% endif %}
 
-                            {% if current_user.is_authenticated %}
+                            {% if current_user.admin_account %}
                             <a href="{{ url_for('auth.create') }}" class="navbar-item">
                                 Create
                             </a>

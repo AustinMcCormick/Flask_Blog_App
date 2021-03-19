@@ -236,13 +236,14 @@ def subscribe():
         description='Blog sub purchase'
     )
 
-    print(" Pre ", current_user.subscription_start, " Stripe token ", current_user.sub_token)
+    # print(" Pre ", current_user.subscription_start, " Stripe token ", current_user.sub_token, " ", current_user.subscribed)
 
+    current_user.subscribed = True
     current_user.subscription_start = datetime.now()
     current_user.sub_token = request.form['stripeToken']
     db.session.commit()
 
-    print("post ", current_user.subscription_start, " Stripe token ", current_user.sub_token)
+    # print("Post ", current_user.subscription_start, " Stripe    ", current_user.sub_token, " ", current_user.subscribed)
 
 
     return redirect(url_for('auth.thanks'))
