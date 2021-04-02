@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    My Cart
+</h1>
+
+<div class="box">
+    <table class="product_table">
+        <thead>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Discount</th>
+            <th>Subtotal</th>
+            <th>Update</th>
+            <th>Remove</th>
+        </thead>
+        <tbody>
+            {% for key , product in session['cart'].items() %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td><img src="{{ product.image }}" alt="{{ product.name }}" width="50" height="45"></td>
+                <td>${{"%0.2f"|format(product.price|float)}}</td>
+                <form action="{{ url_for('auth.Update_Cart', code=key) }}" method="POST">
+                <td><input type="number" name="quantity" min="1" max="17" value="{{ product.quantity }}"></td>
+                
+                {% if product.discount > 0 %}
+                <td>{{ product.discount }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+
+                {% set subtotal = product.quantity|int * product.price|float %}
+                <td>{{"%0.2f"|format(subtotal|float)}}</td>
+                <td><button type="submit" class="btn">Update</button></td>
+                </form>
+                <form action="{{ url_for('auth.Delete', id=key) }}" method="POST">
+                <td><button type="submit" class="btn">Delete</button></td>
+                </form>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="2"><h4>Before Taxes : ${{"%0.2f"|format(before_tax|float)}}</h4></td>
+                <td colspan="2"><h4>Tax : ${{"%0.2f"|format(tax|float)}}</h4></td>
+                <td colspan="3"><h4>Grand Total : ${{"%0.2f"|format(grandtotal|float)}}</h4></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <tr>
+        <td></td>
+        <td>
+            <form action="/store" method='GET'>
+                <button>Continue Shopping</button>
+            </form></td>
+        <td>
+            <form action="/checkout" method='GET'>
+                <button>Checkout</button>
+            </form>
+        </td>
+        <td>
+            <form action="/clear_cart" method="POST">
+                <button>Clear Cart</button>
+            </form>            
+        </td>
+    </tr>
+</div>
+
+{% endblock %}

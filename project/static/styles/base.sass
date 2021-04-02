@@ -78,6 +78,8 @@ $white: #FFFFFF
 @mixin stroke($stroke, $color) 
   text-shadow: stroke($stroke, $color)
 
+
+// General Styling
 html
   background-color: $darkGray
   padding-bottom: 5px
@@ -98,6 +100,8 @@ html
   color: $blue 
   text-align: center
 
+
+// Nav bar Styling
 .navbar
   float: right
 
@@ -112,6 +116,8 @@ html
   &:active
     background-color: $red
 
+
+// Blog post Styling
 .box
   @include multi-center($horizontal: true, $vertical: true)
   background-color: $silver
@@ -141,6 +147,17 @@ html
   text-align: center
   background-color: $silver
 
+  
+// Store styling
+.product_box
+  // @include multi-center($horizontal: True, $vertical: False)
+  background-color: $silver
 
+.product-title
+  text-align: center
 
-
+.product-price
+  text-align: center
+  
+.product-tile-footer
+  text-align: center

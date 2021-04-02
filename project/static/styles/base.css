@@ -76,4 +76,20 @@ html {
   text-align: center;
   background-color: #8E9090;
 }
+
+.product_box {
+  background-color: #8E9090;
+}
+
+.product-title {
+  text-align: center;
+}
+
+.product-price {
+  text-align: center;
+}
+
+.product-tile-footer {
+  text-align: center;
+}
 /*# sourceMappingURL=base.css.map */

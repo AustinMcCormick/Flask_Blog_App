@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+    {{ item.product_name }} Details
+</h1>
+
+<div class="product-image"><img src="{{ item.product_img }}"></div>
+<div class="product_box">
+  <div>
+    <div class="product_title">Product price: ${{ item.product_price }}</div>
+    <div class="product_title">Product discount: 7.5%</div>
+    <hr>
+    <div class="product_content">ITEM DESCRIPTION</div>
+    <hr>
+  </div>        
+  <form action="/add_to_cart"  method="POST">
+    <div class="cart-action">
+      <input type="hidden" name="id" value="{{ item.id }}"/>
+      <input type="number" name="quantity" value="1"/>
+      <input type="submit" value="Add to Cart" class="btnAddAction" />
+    </div>
+  </form>
+</div>
+{% endblock %}

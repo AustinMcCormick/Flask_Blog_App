@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="title">
+  Welcome to the Checkout
+</h1>
+
+<div class="box">
+    <table class="product_table">
+        <thead>
+            <th>Name</th>
+            <th>Image</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Discount</th>
+            <th>Subtotal</th>
+        </thead>
+        <tbody>
+            {% for key , product in session['cart'].items() %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td><img src="{{ product.image }}" alt="{{ product.name }}" width="50" height="45"></td>
+                <td>${{"%0.2f"|format(product.price|float)}}</td>
+                <td>{{ product.quantity }}</td>
+                
+                {% if product.discount > 0 %}
+                <td>{{ product.discount }}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+
+                {% set subtotal = product.quantity|int * product.price|float %}
+                <td>${{"%0.2f"|format(subtotal|float)}}</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="1.5"><h4>Before Taxes : ${{"%0.2f"|format(total|float)}}</h4></td>
+                <td colspan="1.5"><h4>Tax : ${{"%0.2f"|format(tax|float)}}</h4></td>
+                <td colspan="2"><h4>Grand Total : ${{"%0.2f"|format(grandtotal|float)}}</h4></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <tr>
+        <td></td>
+        <td>
+            <form action="/cart" method="GET">
+                <button>Back to Cart</button>
+            </form></td>
+        <td>
+    </tr>
+
+    <form action="/purchase" method="POST">
+        <input type="hidden" name="charge_amount" value="{{charge_amount}}"/>
+        <input type="hidden" name="charge_description" value="{{products}}"/>
+        <script
+            src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+            data-key="{{ pub_key }}"
+            data-amount="{{ charge_amount }}"
+            data-name="Shop purchase"
+            data-description="{{ products }}"
+            data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+            data-locale="auto">
+        </script>
+    </form>
+
+</div>
+{% endblock %}

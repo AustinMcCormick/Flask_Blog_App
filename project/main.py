@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 from flask_login import login_required, current_user
 from . import db 
 from datetime import datetime, timedelta
@@ -12,12 +12,12 @@ def index():
 @main.route('/profile')
 @login_required
 def profile():
-    
-    print(" Pre ", current_user.subscription_start, " ", current_user.subscribed)
+    # print(" Pre ", current_user.subscription_start, " ", current_user.subscribed)
 
     # Check to see if user is a subscribed non-admin account
     if(current_user.subscribed and not current_user.admin_account):
-        sub_end_date = current_user.subscription_start + timedelta(seconds=90) # timedelta(days=90)
+        # Increase subscription time limit. Lol $9.99 for 90 second subscriptions, I'm not making that kind of website
+        sub_end_date = current_user.subscription_start + timedelta(days=90)
         # Check to see if it is past the users subscription time
         if(datetime.now() > sub_end_date):
             # remove subscription from the account
@@ -29,7 +29,7 @@ def profile():
 
             db.session.commit()
 
-    print("Post ", current_user.subscription_start, " ", current_user.subscribed)
+    # print("Post ", current_user.subscription_start, " ", current_user.subscribed)
 
     # render profile page for public user
     if(current_user.public_profile == True):

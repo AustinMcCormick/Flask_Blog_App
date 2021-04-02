@@ -4,11 +4,15 @@
 <h1 class="title">
   Welcome to the blog shop
 </h1>
-<h2 class="subtitle">
-  Purchase blog subscription for $9.99
-</h2>
 
-<form action="/subscribe" method="POST">
+
+{% if not current_user.subscribed %}
+<div class="sub-box">
+  <h2 class="subtitle">
+    Purchase blog subscription for $9.99
+  </h2>
+
+  <form action="/subscribe" method="POST">
     <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="{{ pub_key }}"
@@ -18,5 +22,29 @@
         data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
         data-locale="auto">
     </script>
-</form>
+  </form>
+</div>
+<br>
+{% endif %}
+
+
+{% for product in products %}
+  <div class="product_box">
+    <form method="post" action="/add_to_cart">
+      <div class="product-image"><img src="{{ product.product_img }}"></div>
+      <div class="product-tile-footer">
+        <div class="product-title">{{ product.product_name }}</div>
+        <div class="product-price">${{ product.product_price }}</div>
+        <a class="clicker" href="/details/{{ product.id }}">Details</a>
+        <div class="cart-action">
+          <input type="hidden" name="id" value="{{ product.id }}"/>
+          <input type="hidden" name="quantity" value="1"/>
+          <input type="submit" value="Add to Cart" class="btnAddAction" />
+        </div>
+      </div>
+    </form>
+    <hr>
+  </div>
+{% endfor %}
+
 {% endblock %}

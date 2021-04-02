@@ -14,9 +14,18 @@
       <br>
       <td class="blog-content">{{ blog.content }}</td>
 
-      {% if current_user.is_authenticated %}
+      {% if current_user.admin_account %}
       <td>
           <br>
+          <a class="clicker" href="/delete/{{blog.id}}">Delete</a>
+          <a class="clicker" href="/update/{{blog.id}}">Update</a>
+          <br>
+      </td>
+      <br>
+      {% endif %}
+
+      {% if current_user.is_authenticated %}
+      <td>
           <a class="clicker" href="/update/{{blog.id}}">Comment</a>
           <br>
       </td>

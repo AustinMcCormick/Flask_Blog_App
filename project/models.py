@@ -21,3 +21,11 @@ class Blog(db.Model):
     title = db.Column(db.String(50), nullable=False)
     content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    product_name = db.Column(db.String(100), nullable=False)
+    product_code = db.Column(db.String(50), nullable=False)
+    product_img = db.Column(db.String(100), nullable=False)
+    product_price = db.Column(db.Integer, nullable=False)
