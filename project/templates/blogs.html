@@ -8,7 +8,7 @@
   Recent Posts
 </h2>
 {% for blog in blogs %}
-<div class="box">
+<div class="blog-box">
   <tr>
       <td class="blog-title">{{ blog.title }}</td>
       <br>
@@ -21,7 +21,6 @@
           <a class="clicker" href="/update/{{blog.id}}">Update</a>
           <br>
       </td>
-      <br>
       {% endif %}
 
       {% if current_user.is_authenticated %}

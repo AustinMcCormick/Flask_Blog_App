@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session
 from flask_login import login_required, current_user
-from . import db 
+from project import db 
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
